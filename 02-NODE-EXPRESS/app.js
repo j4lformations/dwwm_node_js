@@ -10,20 +10,35 @@ const app = express();
 // On definit le port du serveur
 const port = 5500;
 
+// EXEMPLE DE MIDDLEWARE
+function monMiddleWare(req, res, next) {
+    console.log('Je suis dans le middleware');
+    console.log(new Date().getTime());
+    req.prenom = 'Joachim';
+    req.jour = new Date().getDay();
+    next();
+}
+
+// APPEL DU MIDDLEWARE
+app.use(monMiddleWare);
+
 // REGROUPEMENTS DES CONSTANTES DE ROUTES
 const tousLesStagiaires = function (req, res) {
     // LA GESTION DE CETTE ROUTE SE PASSE ICI
     res
         .status(200)
         .json({
-            "msg": "METHODE GET OK !"
+            "msg": "METHODE GET OK !",
+            "prenom": `${req.prenom}`,
+            "jour": `${req.jour}`
         });
 }
 const ajouterUnStagiaire = (req, res) => {
     res
         .status(200)
         .json({
-            "msg": "METHODE POST OK !"
+            "msg": "METHODE POST OK !",
+            "prenom": `${req.prenom}`
         });
 }
 const rechercherStagiaire = (req, res) => {
