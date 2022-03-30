@@ -49,11 +49,21 @@ const supprimerUnStagiaire = (req, res) => {
 }
 
 // FACTORISATION DES ROUTES
-app.get('/api/stagiaires', tousLesStagiaires);
-app.get('/api/stagiaires/:id', rechercherStagiaire);
-app.post('/api/stagiaires', ajouterUnStagiaire);
-app.put('/api/stagiaires/:id', modifierUnStagiaire);
-app.delete('/api/stagiaires/:id', supprimerUnStagiaire);
+// app.get('/api/stagiaires', tousLesStagiaires);
+// app.get('/api/stagiaires/:id', rechercherStagiaire);
+// app.post('/api/stagiaires', ajouterUnStagiaire);
+// app.put('/api/stagiaires/:id', modifierUnStagiaire);
+// app.delete('/api/stagiaires/:id', supprimerUnStagiaire);
+
+// CHAINAGE DES ROUTES
+app.route('/api/stagiaires')
+    .get(tousLesStagiaires)
+    .post(ajouterUnStagiaire);
+
+app.route('/api/stagiaires/:id')
+    .get(rechercherStagiaire)
+    .put(modifierUnStagiaire)
+    .delete(supprimerUnStagiaire);
 
 // Demarrage du serveur
 app.listen(port, () => {
