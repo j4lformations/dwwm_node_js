@@ -2,23 +2,23 @@
 // ========================================================
 
 //////////////////////////////////////////////////////////////////////////////
-// let prenom = 'ALT-RH';
-// console.log(prenom);
-//
-// window.prompt(); // => Non autoriser sur la platform native de NODE
+let prenom = 'ALT-RH';
+console.log(prenom);
+
+window.prompt(); // => Non autoriser sur la platform native de NODE
 
 //////////////////////////////////////////////////////////////////////////////
-// const fs = require('fs');
-//
-// // Comportement Synchrone
-// console.log(fs.readFileSync('text/entree.txt','utf-8'));
-// console.log('Fin de la lecture du fichier');
-//
-// // Comportement Asynchrone
-// fs.readFile('text/entree.txt', 'utf-8', function (err, data) {
-//     console.log(data);
-// });
-// console.log('Fin de la lecture du fichier');
+const fs = require('fs');
+
+// Comportement Synchrone
+console.log(fs.readFileSync('text/entree.txt','utf-8'));
+console.log('Fin de la lecture du fichier');
+
+// Comportement Asynchrone
+fs.readFile('text/entree.txt', 'utf-8', function (err, data) {
+    console.log(data);
+});
+console.log('Fin de la lecture du fichier');
 
 //////////////////////////////////////////////////////////////////////////////
 const http = require('http');
