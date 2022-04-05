@@ -3,13 +3,7 @@
 
 const express = require('express');
 const router = express.Router();
-// const {
-//     tousLesStagiaires,
-//     ajouterUnStagiaire,
-//     modifierUnStagiaire,
-//     rechercherStagiaire,
-//     supprimerUnStagiaire
-// } = require('../controllers/stagiairesController')
+
 const controller = require('../controllers/stagiairesController')
 
 router
