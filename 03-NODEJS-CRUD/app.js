@@ -7,10 +7,13 @@ const express = require('express');
 const stagiaireRouter = require('./routes/stagiaireRoutes');
 require('./config/database');
 
-
 //////////////////////////////////////////////////////////////////////
 // CREATION DE L'INSTANCE DU SERVEUR
 const app = express();
+
+//////////////////////////////////////////////////////////////////////
+// LES MIDDLEWARES
+app.use(express.json());
 
 app.use('/dwwm/stagiaires', stagiaireRouter);
 

@@ -1,6 +1,6 @@
 // Crée par Joachim Zadi le 06/04/2022 à 09:57. Version 1.0
 // ========================================================
-
+const Stagiaire = require('../models/stagiaireModel');
 
 //////////////////////////////////////////////////////////////////////
 // LES CONTROLLERS DE L'APP
@@ -10,13 +10,12 @@
  * @param requete
  * @param reponse
  */
-exports.allStagiaires = function (requete, reponse) {
+exports.allStagiaires = async function (requete, reponse) {
+    // Permet de recupere tous les stagiaires en BDD
+    const stagiaires = await Stagiaire.find({});
     reponse
         .status(200)
-        .json({
-            statut: reponse.statusCode,
-            message: 'ROUTE GET ALL OK'
-        });
+        .json(stagiaires);
 }
 
 /**
@@ -24,13 +23,12 @@ exports.allStagiaires = function (requete, reponse) {
  * @param requete
  * @param reponse
  */
-exports.addStagiaire = function (requete, reponse) {
+exports.addStagiaire = async function (requete, reponse) {
+    let stagiaire = new Stagiaire(requete.body);
+    stagiaire = await stagiaire.save();
     reponse
         .status(200)
-        .json({
-            status: reponse.statusCode,
-            message: 'ROUTE POST OK'
-        });
+        .json(stagiaire);
 }
 
 /**
