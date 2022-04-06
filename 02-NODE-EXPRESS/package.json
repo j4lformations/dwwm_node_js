@@ -8,9 +8,6 @@
   },
   "author": "Equipe DWWM-1B",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.3"
-  },
   "devDependencies": {
     "nodemon": "^2.0.15"
   }

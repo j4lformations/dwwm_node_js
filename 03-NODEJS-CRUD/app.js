@@ -5,12 +5,12 @@
 // IMPORTS DES MODULES DE L'APP
 const express = require('express');
 const stagiaireRouter = require('./routes/stagiaireRoutes');
+require('./config/database');
 
 
 //////////////////////////////////////////////////////////////////////
 // CREATION DE L'INSTANCE DU SERVEUR
 const app = express();
-
 
 app.use('/dwwm/stagiaires', stagiaireRouter);
 
@@ -19,4 +19,3 @@ app.use('/dwwm/stagiaires', stagiaireRouter);
 app.listen(4000, () => {
     console.log('http://localhost:4000');
 });
-
