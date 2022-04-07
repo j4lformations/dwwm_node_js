@@ -20,7 +20,6 @@ exports.mongoConnexion = (async () => {
     await mongoose
         .connect(DB_SERVER)
         .then(() => {
-            console.log(DB_SERVER);
             console.log('CONNEXION AU SERVER MONGO OK !!! 💪');
         })
         .catch(erreur => {

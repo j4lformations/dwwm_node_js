@@ -22,9 +22,11 @@ exports.allStagiaires = async function (requete, reponse) {
                 msg: 'Aucun stagiaire en BDD'
             })
     } else {
-        reponse
-            .status(200)
-            .json(stagiaires);
+        reponse.render('stagiaires', {
+            titre: "Liste des stagiaires",
+            listeStagiaires: stagiaires,
+            url: requete.baseUrl
+        });
     }
 }
 

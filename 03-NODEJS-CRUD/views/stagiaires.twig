@@ -1,0 +1,30 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<h1>{{ titre }}</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Prenom</th>
+        <th>Date de naissance</th>
+        <th>Email</th>
+        <th>Mot de passe</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for stagiaire in listeStagiaires %}
+        <tr>
+            <td>{{ stagiaire._id }}</td>
+            <td>{{ stagiaire.prenom }}</td>
+            <td>{{ stagiaire.ddn }}</td>
+            <td>{{ stagiaire.email }}</td>
+            <td>{{ stagiaire.mdp }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block titrePage %}Liste Stagiaires{% endblock %}
