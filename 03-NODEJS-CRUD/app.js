@@ -4,6 +4,7 @@
 //////////////////////////////////////////////////////////////////////
 // IMPORTS DES MODULES DE L'APP
 const express = require('express');
+require('dotenv').config();
 const stagiaireRouter = require('./routes/stagiaireRoutes');
 require('./config/database');
 
@@ -17,8 +18,4 @@ app.use(express.json());
 
 app.use('/dwwm/stagiaires', stagiaireRouter);
 
-//////////////////////////////////////////////////////////////////////
-// DEMARRAGE DU SERVEUR
-app.listen(4000, () => {
-    console.log('http://localhost:4000');
-});
+module.exports = app;

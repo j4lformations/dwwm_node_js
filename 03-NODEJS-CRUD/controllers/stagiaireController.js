@@ -1,6 +1,7 @@
 // Crée par Joachim Zadi le 06/04/2022 à 09:57. Version 1.0
 // ========================================================
 const Stagiaire = require('../models/stagiaireModel');
+const ObjectID = require("bson-objectid");
 
 //////////////////////////////////////////////////////////////////////
 // LES CONTROLLERS DE L'APP
@@ -13,9 +14,18 @@ const Stagiaire = require('../models/stagiaireModel');
 exports.allStagiaires = async function (requete, reponse) {
     // Permet de recupere tous les stagiaires en BDD
     const stagiaires = await Stagiaire.find({});
-    reponse
-        .status(200)
-        .json(stagiaires);
+
+    if (!stagiaires) {
+        reponse
+            .status(200)
+            .json({
+                msg: 'Aucun stagiaire en BDD'
+            })
+    } else {
+        reponse
+            .status(200)
+            .json(stagiaires);
+    }
 }
 
 /**
@@ -25,10 +35,18 @@ exports.allStagiaires = async function (requete, reponse) {
  */
 exports.addStagiaire = async function (requete, reponse) {
     let stagiaire = new Stagiaire(requete.body);
-    stagiaire = await stagiaire.save();
-    reponse
-        .status(200)
-        .json(stagiaire);
+    try {
+        stagiaire = await stagiaire.save();
+        reponse
+            .status(200)
+            .json(stagiaire);
+    } catch (e) {
+        reponse
+            .status(200)
+            .json({
+                message: e.message
+            });
+    }
 }
 
 /**
@@ -36,13 +54,19 @@ exports.addStagiaire = async function (requete, reponse) {
  * @param requete
  * @param reponse
  */
-exports.getStagiaireById = function (requete, reponse) {
+exports.getStagiaireById = async function (requete, reponse) {
+    const id = requete.params.id;
+    if (!ObjectID.isValid(id)) {
+        return reponse
+            .status(400)
+            .json({
+                message: `L'id ${id} est non conforme au format attendu`
+            });
+    }
+    const stagiaire = await Stagiaire.findOne({_id: id});
     reponse
         .status(200)
-        .json({
-            status: reponse.statusCode,
-            message: 'ROUTE GET BY ID OK'
-        });
+        .json(stagiaire);
 }
 
 /**
@@ -50,13 +74,23 @@ exports.getStagiaireById = function (requete, reponse) {
  * @param requete
  * @param reponse
  */
-exports.updateStagiaireById = (requete, reponse) => {
+exports.updateStagiaireById = async (requete, reponse) => {
+    const id = requete.params.id;
+    if (!ObjectID.isValid(id)) {
+        return reponse
+            .status(400)
+            .json({
+                message: `L'id ${id} est non conforme au format attendu`
+            });
+    }
+
+    const stagiaire = await Stagiaire.findByIdAndUpdate({_id: id}, requete.body/*, {
+        new: true,
+        rawResult: true
+    }*/);
     reponse
         .status(200)
-        .json({
-            status: reponse.statusCode,
-            message: 'ROUTE PUT BY ID OK'
-        });
+        .json(stagiaire);
 }
 
 /**
